@@ -16,9 +16,10 @@
 # KIND, either express or implied.  See the License for the
 # specific language governing permissions and limitations
 # under the License.
-from rocketmq.client import Producer, Message, TransactionMQProducer, TransactionStatus
+from rocketmq.client import Producer, Message
 
 import time
+import sys
 
 topic = 'tigerweili-topic-01'
 producer_group_name = 'tigerweili-producer-group-01'
@@ -47,6 +48,9 @@ def send_message_sync(count):
 
 
 if __name__ == '__main__':
+    if len(sys.argv) > 0:
+        name_srv = sys.argv[1]
+        
     send_message_sync(10)
 
 

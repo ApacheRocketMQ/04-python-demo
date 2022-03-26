@@ -19,8 +19,9 @@
 
 from rocketmq.client import PushConsumer, ConsumeStatus
 import time
-
+import sys
 name_srv = '127.0.0.1:9876'
+
 
 def callback(msg):
     print('consuming message', msg.id, msg.body,  msg.get_property('property'))
@@ -37,4 +38,6 @@ def start_consume_message():
         time.sleep(3600)
 
 if __name__ == '__main__':
+    if len(sys.argv) > 0:
+        name_srv = sys.argv[1]
     start_consume_message()
