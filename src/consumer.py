@@ -20,6 +20,8 @@
 from rocketmq.client import PushConsumer, ConsumeStatus
 import time
 import sys
+topic = 'tigerweili-topic-01'
+consumer_group_name = 'tigerweili-producer-group-01'
 name_srv = '127.0.0.1:9876'
 
 
@@ -28,9 +30,9 @@ def callback(msg):
     return ConsumeStatus.CONSUME_SUCCESS
 
 def start_consume_message():
-    consumer = PushConsumer('consumer_group')
+    consumer = PushConsumer(consumer_group_name)
     consumer.set_name_server_address(name_srv)
-    consumer.subscribe('TopicTest', callback)
+    consumer.subscribe(topic, callback)
     print ('start consume message')
     consumer.start()
 
@@ -40,4 +42,5 @@ def start_consume_message():
 if __name__ == '__main__':
     if len(sys.argv) > 0:
         name_srv = sys.argv[1]
+        
     start_consume_message()
